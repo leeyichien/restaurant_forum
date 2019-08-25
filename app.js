@@ -10,6 +10,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 const port = 3000;
 
+app.use("/upload", express.static(__dirname + "/upload"));
 app.use(session({ secret: "secret", resave: false, saveUninitialized: false }));
 app.use(flash());
 
