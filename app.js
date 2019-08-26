@@ -10,6 +10,10 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 const port = process.env.PORT || 3000;
 
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 app.use("/upload", express.static(__dirname + "/upload"));
 app.use(session({ secret: "secret", resave: false, saveUninitialized: false }));
 app.use(flash());
