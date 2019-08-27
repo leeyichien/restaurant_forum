@@ -1,5 +1,6 @@
 const db = require("../models");
 const Restaurant = db.Restaurant;
+const User = db.User;
 const fs = require("fs");
 const imgur = require("imgur-node-api");
 const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID;
@@ -10,6 +11,27 @@ const adminController = {
       return res.render("admin/restaurants", { restaurants: restaurants });
     });
   },
+  //使用者權限管理
+  //顯示使用者清單
+  editUsers: (req, res) => {
+    return User.findAll().then(users => {
+      return res.render("admin/users", { users: users });
+    });
+  },
+  //修改使用者權限
+  putUsers: (req, res) => {
+    return User.findByPk(req.params.id).then(user => {
+      user
+        .update({
+          isAdmin: !user.isAdmin
+        })
+        .then(user => {
+          req.flash("success_messages", "user was successfully to update");
+          return res.redirect("/admin/users");
+        });
+    });
+  },
+
   createRestaurant: (req, res) => {
     return res.render("admin/create");
   },

@@ -33,6 +33,11 @@ module.exports = (app, passport) => {
     adminController.getRestaurants
   );
 
+  //顯示使用者清單 路由
+  app.get("/admin/users", authenticatedAdmin, adminController.editUsers);
+  //修改使用者權限 路由
+  app.put("/admin/users/:id", authenticatedAdmin, adminController.putUsers);
+
   app.get(
     "/admin/restaurants/create",
     authenticatedAdmin,
