@@ -9,6 +9,7 @@
       <ul class="list-unstyled">
         <li><strong>Name:</strong> {{profile.name}}</li>
         <li><strong>Email:</strong> {{profile.email}}</li>
+        <li><strong>{{profile.Comments.length}}已評論餐廳</strong></li>
       </ul>
     </div>
     {{#ifCond profile.id user.id}}
@@ -20,3 +21,13 @@
     </a>
   </div>
 </div>
+
+<br /><br />
+<h5>{{profile.Comments.length}}已評論餐廳</h5>
+{{#each profile.Comments}}
+<a href="../restaurants/{{this.Restaurant.id}}">
+  <img class="img-responsive center-block" src="{{this.Restaurant.image}}" alt="Card image cap" width="100px"
+    height="100px">
+</a>
+{{/each}}
+<br />
