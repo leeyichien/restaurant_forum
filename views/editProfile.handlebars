@@ -1,0 +1,17 @@
+<form action="/users/{{profile.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="image">Name</label>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Enter name" value="{{profile.name}}">
+      </div>
+      <div class="form-group">
+        <label for="image">Image</label>
+        <input type="file" class="form-control-file" id="image" name="image">
+      </div>
+      {{#ifCond profile.id user.id}}
+      <button type="submit" class="btn btn-primary">Submit</button>
+      {{/ifCond}}
+    </div>
+  </div>
+</form>
