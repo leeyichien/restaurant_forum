@@ -151,4 +151,10 @@ module.exports = (app, passport) => {
     authenticated,
     userController.removeFavorite
   );
+  app.post("/following/:userId", authenticated, userController.addFollowing);
+  app.delete(
+    "/following/:userId",
+    authenticated,
+    userController.removeFollowing
+  );
 };
