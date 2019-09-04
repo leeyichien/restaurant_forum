@@ -15,5 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     User.hasMany(models.Comment);
   };
+  User.belongsToMany(models.Restaurant, {
+    through: models.Favorite,
+    foreignKey: "UserId",
+    as: "FavoritedRestaurants"
+  });
   return User;
 };
