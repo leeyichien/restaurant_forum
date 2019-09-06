@@ -81,13 +81,16 @@ const adminController = {
     }
   },
   getRestaurant: (req, res) => {
-    return Restaurant.findByPk(req.params.id, { include: [Category] }).then(
-      restaurant => {
-        return res.render("admin/restaurant", {
-          restaurant: restaurant
-        });
-      }
-    );
+    adminService.getRestaurant(req, res, data => {
+      return res.render("admin/restaurant", data);
+    });
+    //return Restaurant.findByPk(req.params.id, { include: [Category] }).then(
+    //  restaurant => {
+    //   return res.render("admin/restaurant", {
+    //     restaurant: restaurant
+    //   });
+    //  }
+    //);
   },
   //編輯餐廳
   editRestaurant: (req, res) => {
