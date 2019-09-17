@@ -4,6 +4,7 @@ const User = db.User;
 const Comment = db.Comment;
 const Restaurant = db.Restaurant;
 const Favorite = db.Favorite;
+const Like = db.Like;
 const Followship = db.Followship;
 const fs = require("fs");
 const imgur = require("imgur-node-api");
@@ -129,6 +130,28 @@ const userController = {
       });
     });
   },
+  addLike: (req, res) => {
+    return Like.create({
+      UserId: req.user.id,
+      RestaurantId: req.params.restaurantId
+    }).then(restaurant => {
+      return res.redirect("back");
+    });
+  },
+
+  removeLike: (req, res) => {
+    return Like.findOne({
+      where: {
+        UserId: req.user.id,
+        RestaurantId: req.params.restaurantId
+      }
+    }).then(like => {
+      like.destroy().then(restaurant => {
+        return res.redirect("back");
+      });
+    });
+  },
+
   getTopUser: (req, res) => {
     // 撈出所有 User 與 followers 資料
     return User.findAll({
